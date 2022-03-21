@@ -1,23 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>ID: {{ $task->id }} のタスク編集ページ</h1>
-
-    <div class="row">
-        <div class="col-6">
-            {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'put']) !!}
-                <div class="form-group">
-                    {!! Form::label('status', 'ステータス:') !!}
-                    {!! Form::text('status', null, ['class' => 'form-control']) !!}
-                </div>
-
-                <div class="form-group">
-                    {!! Form::label('content', 'タスク:') !!}
-                    {!! Form::text('content', null, ['class' => 'form-control', 'autofocus' => 'autofocus']) !!}
-                </div>
-
-                {!! Form::submit('更新', ['class' => 'btn btn-primary']) !!}
-            {!! Form::close() !!}
+    @if (Auth::check())
+        <h1>ID: {{ $task->id }} のタスク編集ページ</h1>
+    
+        <div class="row">
+            <div class="col-6">
+                {!! Form::model($task, ['route' => ['tasks.update', $task->id], 'method' => 'put']) !!}
+                    <div class="form-group">
+                        {!! Form::label('status', 'ステータス:') !!}
+                        {!! Form::text('status', null, ['class' => 'form-control']) !!}
+                    </div>
+    
+                    <div class="form-group">
+                        {!! Form::label('content', 'タスク:') !!}
+                        {!! Form::text('content', null, ['class' => 'form-control', 'autofocus' => 'autofocus']) !!}
+                    </div>
+    
+                    {!! Form::submit('更新', ['class' => 'btn btn-primary']) !!}
+                {!! Form::close() !!}
+            </div>
         </div>
-    </div>
+    @else
+        {{-- 未認証 --}}
+        @include('auth.not_authenticated')
+        
+    @endif
 @endsection

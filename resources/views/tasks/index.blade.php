@@ -28,13 +28,8 @@
         {{-- タスク作成ページへのリンク --}}
         {!! link_to_route('tasks.create', '新規タスクの作成', [], ['class' => 'btn btn-primary']) !!}
     @else
-        <div class="center jumbotron">
-            <div class="text-center">
-                <h1>タスクリスト</h1>
-
-                {{-- ユーザ登録ページへのリンク --}}
-                {!! link_to_route('signup.get', 'Sign up now!', [], ['class' => 'btn btn-lg btn-primary']) !!}
-            </div>
-        </div>
+        {{-- 未認証 --}}
+        @include('auth.not_authenticated')
+        
     @endif
 @endsection
