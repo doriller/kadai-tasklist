@@ -2,9 +2,12 @@
 
 @section('content')
     @if (Auth::check())
+        <?php //dd(Auth::user()); ?>
+        <?php //dd($data['tasks']); ?>
+        <?php //dd($tasks); ?>
         <h1>タスク一覧</h1>
 
-        @if (count($tasks) > 0)
+        @if (isset($data['tasks']) && count($data['tasks']) > 0)
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -14,7 +17,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($tasks as $task)
+                    @foreach ($data['tasks'] as $task)
+                    <?php //dd($task); ?>
                     <tr>
                         <td>{!! link_to_route('tasks.show', $task->id, ['task' =>$task->id]) !!}</td>
                         <td>{{ $task->status }}</td>
